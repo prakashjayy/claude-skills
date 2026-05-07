@@ -7,6 +7,8 @@ description: Sets up a Python repository using the uv package manager with pypro
 
 Sets up a Python project with uv. Required: **repo name** and **--torch** flag (use `--torch` to include PyTorch, omit to skip).
 
+> **Important:** Everything is created **in the current working directory** — no subfolder is created. The repo name is only used as the `name` field in `pyproject.toml`. Never run `uv init <repo-name>` (that creates a folder). Always use `uv init .` to init in-place.
+
 ## Workflow
 
 ### Step 1 — Check and install uv
@@ -19,22 +21,27 @@ fi
 uv --version
 ```
 
-### Step 2 — Initialize project
+### Step 2 — Initialize project in-place
 
 ```bash
-uv init <repo-name>
-cd <repo-name>
+uv init .
 ```
 
-### Step 3a — No torch: leave pyproject.toml as-is, then sync
+This creates `pyproject.toml`, `README.md`, and `.python-version` in the current directory — no subfolder.
+
+### Step 3 — Set the project name
+
+After `uv init .`, open `pyproject.toml` and set `name = "<repo-name>"` (from the user's argument).
+
+### Step 4a — No torch: sync as-is
 
 ```bash
 uv sync
 ```
 
-### Step 3b — With `--torch`: replace pyproject.toml with the template in [TORCH-TEMPLATE.md](TORCH-TEMPLATE.md), then sync
+### Step 4b — With `--torch`: overwrite pyproject.toml then sync
 
-Substitute `<repo-name>` for the `name` field. After writing the file:
+Read the template from [TORCH-TEMPLATE.md](TORCH-TEMPLATE.md). Write it to `./pyproject.toml` with `name = "<repo-name>"` substituted. Then:
 
 ```bash
 # macOS or CPU-only Linux
@@ -58,4 +65,4 @@ macOS gets MPS acceleration via the standard CPU wheel — no separate index nee
 
 ## After setup
 
-Print the final project structure with `find <repo-name> -not -path '*/.venv/*' | head -20` and confirm which torch extra was installed (if any).
+Print the files created with `ls -1` and confirm which torch extra was installed (if any).
