@@ -1,6 +1,6 @@
 ---
 name: notebook-style
-description: Structures Jupyter notebooks using a pedagogical workflow: short intro → imports → progressive concept-building cells → visualizations → consolidate into functions → complex demos → applications. Enforces one idea per cell, narrative markdown between code, and the pattern of raw exploration first then function consolidation. Use when user mentions jupyter, notebook, .ipynb, "clean up my notebook", "structure this notebook", or asks to write a notebook on any concept/dataset.
+description: 'Structures Jupyter notebooks using a pedagogical workflow: short intro → imports → progressive concept-building cells → visualizations → consolidate into functions → complex demos → applications. Enforces one idea per cell, narrative markdown between code, and the pattern of raw exploration first then function consolidation. Use when user mentions jupyter, notebook, .ipynb, "clean up my notebook", "structure this notebook", or asks to write a notebook on any concept/dataset.'
 ---
 
 # Notebook Style
