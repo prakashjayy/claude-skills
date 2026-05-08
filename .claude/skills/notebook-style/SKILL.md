@@ -5,114 +5,79 @@ description: 'Structures Jupyter notebooks using a pedagogical workflow: short i
 
 # Notebook Style
 
-## Core Philosophy
-
 Notebooks are **workflows, not scripts.** Each cell is a paragraph in a story.  
-Build raw → visualize → refine → functionize → apply.
+Build raw → visualize → refine → functionize → apply — **per concept, not once at the end.**
 
 ---
 
-## Cell Sequence Pattern
+## Cell Pattern
 
 ```
-[1] Markdown: Concept intro (3–5 sentences max)
-[2] Code: Imports only — no logic
-[3] Code: Simplest possible example of the concept
-[4] Markdown: Why does this matter? What are we about to explore?
-[5] Code: First concrete step (single operation)
-[6] Code: Visualize it
-[7] Markdown: What did we just see? Explain the result
-[8] Code: Next step — build on [5]
-... repeat 5-8 for each sub-concept ...
-[N-2] Code: Consolidate raw cells into clean functions
-[N-1] Code: Demo functions on a harder/combined example
-[N]   Markdown: Where is this used in the real world?
+[1] md  : Concept intro (3–5 sentences, no equations yet)
+[2] code: All imports — nothing else
+
+↓ repeat for each sub-concept ↓
+
+  md  : What is this sub-concept? (one-liner)
+  code: Minimal raw inline example
+  code: Visualize it
+  md  : What does the output tell us?
+  code: def concept_fn(...) — wrap the proven logic
+        skip only if trivial and never reused downstream
+
+↑ downstream cells call earlier functions, never re-implement ↑
+
+[N-1] code: Compose sub-concept functions into a richer end-to-end demo
+[N]   md  : Where is this used in the real world?
 ```
 
 ---
 
 ## Rules
 
-**One cell, one idea.**  
-If a cell does two things, split it.  
-If it exceeds ~20 lines, it belongs in a function or a split cell.
+**One cell, one idea.** >20 lines → split or move to a function.
 
-**Markdown drives the narrative.**  
-Every major transition (new sub-concept, new phase) needs a markdown cell.  
-Don't let two conceptually distinct code cells be adjacent without explanation.
+**Markdown between every concept shift.** No two conceptually distinct code cells adjacent.
 
-**Visualize before explaining.**  
-Plot first, interpret in the next markdown cell. Let the reader see it first.  
-For every visualization cell, follow [MATPLOTLIB.md](MATPLOTLIB.md).
+**Visualize before explaining.** Plot first, interpret in the next markdown cell. Follow [MATPLOTLIB.md](MATPLOTLIB.md).
 
-**Raw before clean, per concept.**  
-For each concept: write the logic inline first, verify it works, then wrap it into a function. Once defined, call that function in all downstream cells — don't re-implement it.
+**Raw before clean, per concept.** Write inline first, verify it works, then wrap into a function. Downstream cells call that function — never re-implement.
 
-**Imports are isolated.**  
-One cell, all imports. Nothing else in it.
+**Imports are isolated.** One cell, all imports, nothing else.
 
 ---
 
-## Notebook Phases
-
-### Phase 1 — Setup (2 cells)
-- Markdown: concept intro, what we're building, dataset context
-- Code: all imports
-
-### Phase 2 — Concept Building (4–10 cells per sub-concept)
-For each sub-concept:
-1. Markdown: what this sub-concept is, one-liner
-2. Code: minimal working example (raw inline logic)
-3. Code: visualize
-4. Markdown: what does the output tell us?
-5. Code: `def concept_fn(...)` — wrap the now-understood logic into a function
-   (skip if trivial or not reused downstream)
-
-Downstream sub-concepts call earlier functions rather than re-implementing.
-
-### Phase 3 — Composition (2–3 cells)
-- Code: compose the sub-concept functions into a complex end-to-end demo
-- Markdown: what does the combined result show?
-
-### Phase 4 — Applications (1–2 cells)
-- Markdown: real-world use cases, pointers to what comes next
-
----
-
-## Anti-Patterns to Avoid
+## Anti-Patterns
 
 | Anti-pattern | Fix |
 |---|---|
-| 100-line cell | Split by operation; move helpers to functions |
+| 100-line cell | Split by operation; move helpers to a function |
 | `import` buried mid-notebook | Hoist all imports to cell 2 |
-| No markdown between concept shifts | Add transition markdown cells |
-| Function defined before its concept is shown | Show raw inline first, then wrap into a function |
-| Re-implementing logic that was already functionized | Call the existing function; don't duplicate |
+| No markdown between concept shifts | Add a transition markdown cell |
+| Function defined before its concept is shown | Show raw inline first, then wrap |
+| Re-implementing logic already functionized | Call the existing function |
 | All functions deferred to end of notebook | Functionize each concept right after it's explained |
-| Visualization without interpretation | Follow every plot with a markdown explanation |
-| Intro cell that is a wall of text | Max 5 sentences; move detail into later cells |
+| Visualization without interpretation | Follow every plot with a markdown cell |
+| Intro cell wall of text | Max 5 sentences; move detail to later cells |
 
 ---
 
-## Example: Fourier Transform Notebook Outline
+## Example: Fourier Transform Outline
 
 ```
 [1]  md  : What is the Fourier Transform? (5 lines)
 [2]  code: import numpy, matplotlib, scipy
 [3]  code: plot a single sin wave (raw inline)
-[4]  code: def make_signal(freq, duration, fs) — wrap signal generation
+[4]  code: def make_signal(freq, duration, fs)
 [5]  md  : Why move to frequency domain?
-[6]  code: show Euler's formula e^(iθ) = cos+isin (raw inline)
-[7]  md  : What is the winding number / frequency?
-[8]  code: compute amplitude and phase for one freq (raw inline)
-[9]  code: plot amplitude spectrum using make_signal()
-[10] code: def compute_spectrum(signal, fs) — wrap amplitude/phase logic
-[11] md  : What do amplitude and phase tell us?
-[12] code: → composition: generate composite sin, call make_signal() + compute_spectrum(), plot
-[13] md  : Where is FFT used? (audio, images, signal processing)
-[14] code: load 4×4 image, call compute_spectrum() on rows, show magnitude
-[15] md  : What comes next — convolution, filters, spectrogram
+[6]  code: compute amplitude and phase for one freq (raw inline)
+[7]  code: plot amplitude spectrum — calls make_signal()
+[8]  code: def compute_spectrum(signal, fs)
+[9]  md  : What do amplitude and phase tell us?
+[10] code: composite signal → make_signal() + compute_spectrum() → plot
+[11] md  : Where is FFT used? (audio, images, signal processing)
+[12] code: load image, call compute_spectrum() on rows, show magnitude
+[13] md  : What comes next — convolution, filters, spectrogram
 ```
 
-See [EXAMPLES.md](EXAMPLES.md) for annotated cell-level code.  
-See [MATPLOTLIB.md](MATPLOTLIB.md) for visualization rules (bmh style, figure sizing, subplot templates).
+See [MATPLOTLIB.md](MATPLOTLIB.md) for visualization rules.
