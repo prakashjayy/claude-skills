@@ -77,10 +77,46 @@ EOF
 
 Title and authors appear on page 1. Abstract, intro, methods, results, and conclusion are the key sections.
 
-### Step 5 — Write the blog post
+### Step 5 — Identify mathematical concepts and visual opportunities
 
-Follow the framework in [BLOG-FRAMEWORK.md](BLOG-FRAMEWORK.md) exactly. Save output to `<folder>/blog.md`.
+Scan the extracted text and build two lists:
 
-### Step 6 — Confirm
+**Math concepts** — every distinct equation, formula, or proof that a non-expert would not recognize. For each:
+- Name the concept (e.g. "softmax", "KL divergence", "gradient descent")
+- Note the section/equation number where it appears
 
-Tell the user: PDF at `<folder>/<paper-id>.pdf`, blog at `<folder>/blog.md`. Print the blog title and one-line hook.
+**Visual opportunities** — architectures, pipelines, data flows, comparisons, training loops, anything that is easier to grasp as a picture. For each:
+- Name what it shows (e.g. "encoder-decoder architecture", "training pipeline")
+- Note where in the paper it's described
+
+### Step 6 — Create diagram PNGs
+
+For every visual opportunity identified in Step 5, generate a PNG diagram and save it to `<folder>/`.
+
+First ensure matplotlib is available:
+```bash
+uv run python -c "import matplotlib" 2>/dev/null || uv add matplotlib
+```
+
+Then for each diagram, write and execute a self-contained Python script using matplotlib (or graphviz for graphs/networks). Save each file as a descriptive snake_case name, e.g. `<folder>/encoder_decoder_architecture.png`.
+
+Guidelines for diagrams:
+- Use clear labels on every box, arrow, and axis — no unexplained symbols
+- Keep the color palette simple (2–3 colors max)
+- Prefer horizontal left-to-right flow for pipelines; top-to-bottom for hierarchies
+- Use `bbox_inches='tight'` and `dpi=150` when saving
+- After generating, verify each PNG exists before proceeding
+
+### Step 7 — Write the blog post
+
+Follow the framework in [BLOG-FRAMEWORK.md](BLOG-FRAMEWORK.md) exactly. Where math concepts were identified in Step 5, include a **Math Primer** section per the framework. Embed diagrams using relative markdown image links:
+
+```markdown
+![Alt text describing the diagram](./<diagram-name>.png)
+```
+
+Save output to `<folder>/blog.md`.
+
+### Step 8 — Confirm
+
+Tell the user: PDF at `<folder>/<paper-id>.pdf`, blog at `<folder>/blog.md`, and list each PNG diagram created. Print the blog title and one-line hook.

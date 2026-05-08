@@ -12,10 +12,11 @@ The goal: a curious 12-year-old (not literally 5) with no domain knowledge shoul
 3. The Problem (plain English)
 4. Why It's Hard (what people tried before)
 5. The Big Idea (the paper's core insight)
-6. How It Works (step-by-step, with analogies)
-7. The Results (numbers with context)
-8. Why It Matters (real-world so-what)
-9. One-sentence TL;DR
+6. Math Primer (only if the paper uses math — first-principles explanations)
+7. How It Works (step-by-step, with analogies and diagrams)
+8. The Results (numbers with context)
+9. Why It Matters (real-world so-what)
+10. One-sentence TL;DR
 ```
 
 ---
@@ -54,23 +55,53 @@ One sentence that makes a non-expert think "wait, tell me more." Lead with impac
   - Bad: *"The model uses multi-head self-attention."*
   - Good: *"The model uses something called 'attention' — think of it as the model deciding which words in a sentence are most relevant to understanding each other word."*
 
-### 6. How It Works
+### 6. Math Primer *(include only if the paper uses non-trivial math)*
+
+Introduce every mathematical concept the reader will encounter — before they encounter it in the mechanism. Each concept gets its own mini-section:
+
+**Structure for each concept:**
+1. **Name it plainly** — one sentence saying what this thing is in human terms.
+2. **Ground it with a concrete example** — use small numbers and a real-world scenario (not x and y).
+3. **Show the intuition** — why does the math behave the way it does? What is it *measuring* or *doing*?
+4. **Connect it to the paper** — one sentence saying exactly where/how this paper uses it.
+
+**Example (softmax):**
+> Softmax is a function that turns a list of raw scores into probabilities that add up to 1.
+>
+> Say a model thinks word A scores 3, word B scores 1, word C scores 0. Raw scores don't tell you "how much more likely is A than C?" Softmax converts those scores to probabilities — roughly 88%, 11%, 1% — so you can compare and sample from them meaningfully.
+>
+> The trick is exponentiation: it amplifies differences between scores, making the winner win *harder*. That's useful when you want the model to be decisive, not wishy-washy.
+>
+> In this paper, softmax appears in the attention formula to turn compatibility scores between words into a probability distribution over which words to attend to.
+
+**Rules:**
+- Cover every equation the paper uses in the "How It Works" section — no orphan math.
+- Never use the word "trivial" or assume prior calculus knowledge.
+- If two concepts build on each other, introduce them in dependency order.
+- Keep each concept to one short paragraph + one example. Do not go deeper than needed.
+
+### 7. How It Works
 - Walk through the mechanism step by step. Use numbered steps.
 - For each step, pair the technical action with a physical analogy.
 - Analogy sources that work well: cooking, LEGO, post-it notes, libraries, classrooms, sports teams, maps.
 - Keep each step to 2–3 sentences max.
-- If there's a diagram or equation in the paper, describe what it's *doing* in plain language — never reproduce it as-is.
+- Reference Math Primer concepts by name when they appear ("this is where softmax comes in").
+- **Embed diagrams** for any step where a visual would replace a paragraph of description. Use relative markdown image links immediately after the step they illustrate:
+  ```markdown
+  ![The encoder reads the input sentence and compresses it into a meaning vector.](./encoder_decoder_architecture.png)
+  ```
+- Every diagram needs a descriptive alt text (one sentence explaining what the diagram shows).
 
 **Analogy quality test:** Could a 12-year-old picture it? If not, find a simpler one.
 
-### 7. The Results
+### 8. The Results
 - Never quote a raw metric without context.
   - Bad: *"Achieved 92.4% on BLEU score."*
   - Good: *"On the standard translation benchmark, this method made 92 correct calls per 100 — the previous best was 85. That gap is enormous in practice: it's the difference between 'mostly readable' and 'actually useful.'"*
 - Include: what benchmark, what the number means in human terms, how big the improvement is relative to what came before.
 - If the paper beats a baseline: say by how much AND what that feels like ("twice as fast", "half as many errors").
 
-### 8. Why It Matters
+### 9. Why It Matters
 - Answer: *"If this works, what changes in the world?"*
 - Think 3 levels out:
   1. Direct use (what researchers/engineers can now build)
@@ -78,7 +109,7 @@ One sentence that makes a non-expert think "wait, tell me more." Lead with impac
   3. Societal implication (who benefits, any risks?)
 - Keep it grounded. Don't oversell, don't undersell.
 
-### 9. TL;DR
+### 10. TL;DR
 One sentence. Subject + verb + object + why it matters.
 > *"This paper replaced slow sequential AI with a 'look-at-everything-at-once' approach, making language models faster and smarter — and basically started the modern era of AI."*
 
@@ -95,6 +126,9 @@ One sentence. Subject + verb + object + why it matters.
 | Active voice only | More readable |
 | No "groundbreaking", "revolutionary", "state-of-the-art" | Clichés that say nothing |
 | Short sentences when explaining mechanisms | Reduces cognitive load |
+| Math Primer before every equation that appears in How It Works | Reader never hits unexplained symbols |
+| Every diagram has a one-sentence alt text | Accessibility + context |
+| Diagrams saved as PNGs in the paper folder, embedded with relative paths | Self-contained output |
 
 ## Tone
 Warm, curious, enthusiastic — like a smart friend who just read the paper and can't wait to tell you about it. Not academic. Not dumbed-down. Respectful of the reader's intelligence but not their domain knowledge.
