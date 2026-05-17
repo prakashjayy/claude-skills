@@ -10,3 +10,4 @@ A collection of Claude Code skills for common workflows. Clone this repo and poi
 | `notebook-style` | jupyter / .ipynb / "structure this notebook" | Structures Jupyter notebooks with a pedagogical layout: one idea per cell, narrative markdown between code, progressive concept-building. |
 | `setup-uv` | "setup uv" / "init repo with uv" / "uv project" | Sets up a Python repo using the `uv` package manager with `pyproject.toml`. Supports `--torch` for PyTorch with CPU/CUDA/macOS variants. |
 | `write-a-skill` | "write a skill" / "create a skill" / "build a skill" | Scaffolds a new Claude Code skill with proper structure, description, and bundled reference files. |
+| `github-ready` | "github-ready" / "remove claude from commits" / "clean commit history" | Installs a `commit-msg` hook and adds a CLAUDE.md rule so Claude's name never appears in git history. |
