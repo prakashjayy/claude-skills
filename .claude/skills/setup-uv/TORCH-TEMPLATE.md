@@ -39,19 +39,19 @@ conflicts = [
 torch = [
   # macOS always uses CPU index (MPS is bundled)
   { index = "pytorch-cpu", marker = "sys_platform == 'darwin'" },
-  # Linux explicit extras
-  { index = "pytorch-cpu", extra = "torch-cpu" },
-  { index = "pytorch-cuda", extra = "torch-cuda" },
+  # Linux explicit extras — must exclude darwin to avoid conflicting indexes
+  { index = "pytorch-cpu", extra = "torch-cpu", marker = "sys_platform != 'darwin'" },
+  { index = "pytorch-cuda", extra = "torch-cuda", marker = "sys_platform != 'darwin'" },
 ]
 torchvision = [
   { index = "pytorch-cpu", marker = "sys_platform == 'darwin'" },
-  { index = "pytorch-cpu", extra = "torch-cpu" },
-  { index = "pytorch-cuda", extra = "torch-cuda" },
+  { index = "pytorch-cpu", extra = "torch-cpu", marker = "sys_platform != 'darwin'" },
+  { index = "pytorch-cuda", extra = "torch-cuda", marker = "sys_platform != 'darwin'" },
 ]
 torchaudio = [
   { index = "pytorch-cpu", marker = "sys_platform == 'darwin'" },
-  { index = "pytorch-cpu", extra = "torch-cpu" },
-  { index = "pytorch-cuda", extra = "torch-cuda" },
+  { index = "pytorch-cpu", extra = "torch-cpu", marker = "sys_platform != 'darwin'" },
+  { index = "pytorch-cuda", extra = "torch-cuda", marker = "sys_platform != 'darwin'" },
 ]
 
 [[tool.uv.index]]

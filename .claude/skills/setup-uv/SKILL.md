@@ -29,9 +29,15 @@ uv init .
 
 This creates `pyproject.toml`, `README.md`, and `.python-version` in the current directory — no subfolder.
 
-### Step 3 — Set the project name
+### Step 3 — Set the project name and create the package directory
 
 After `uv init .`, open `pyproject.toml` and set `name = "<repo-name>"` (from the user's argument).
+
+Then create the package directory so hatchling can locate it (otherwise `uv sync` fails with "Unable to determine which files to ship"):
+
+```bash
+mkdir -p <repo-name> && touch <repo-name>/__init__.py
+```
 
 ### Step 4a — No torch: sync as-is
 
