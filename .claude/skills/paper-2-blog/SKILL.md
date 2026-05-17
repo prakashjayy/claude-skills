@@ -1,6 +1,6 @@
 ---
 name: paper-2-blog
-description: Downloads an arxiv paper by URL or paper ID, reads it, and writes an accessible blog post explaining it from first principles as if to a curious 5-year-old — using analogies, plain language, and a clear story arc. Use when user mentions arxiv, a paper URL, a paper ID (e.g. 2301.07041), "explain this paper", "paper to blog", or "summarize research paper".
+description: Downloads an arxiv paper by URL or paper ID, reads it, and writes an accessible blog post explaining it from first principles as if to a curious 5-year-old — using analogies, plain language, and a clear story arc. Supports --use-simple-examples flag to add concrete worked examples with real numbers and step-by-step walkthroughs for every technical concept. Use when user mentions arxiv, a paper URL, a paper ID (e.g. 2301.07041), "explain this paper", "paper to blog", "summarize research paper", or passes --use-simple-examples.
 ---
 
 # Paper 2 Blog
@@ -11,6 +11,7 @@ Turns an arxiv paper into a first-principles blog post anyone can understand.
 
 - **arxiv URL or paper ID** — e.g. `https://arxiv.org/abs/2301.07041` or `2301.07041`
 - **folder name** — where to save the PDF and blog. If not provided, **ask the user before proceeding**.
+- **`--use-simple-examples`** *(optional)* — when present, augment every technical concept with a concrete worked example (real numbers, step-by-step walkthrough, data shapes). See [SIMPLE-EXAMPLES.md](SIMPLE-EXAMPLES.md) for the full rules and templates.
 
 ## Workflow
 
@@ -110,6 +111,8 @@ Guidelines for diagrams:
 ### Step 7 — Write the blog post
 
 Follow the framework in [BLOG-FRAMEWORK.md](BLOG-FRAMEWORK.md) exactly. Where math concepts were identified in Step 5, include a **Math Primer** section per the framework. Embed diagrams using relative markdown image links:
+
+If `--use-simple-examples` was passed: after applying BLOG-FRAMEWORK.md, go through every technical concept and add a concrete worked example following [SIMPLE-EXAMPLES.md](SIMPLE-EXAMPLES.md). Place each example immediately after the concept is introduced, before any analogy.
 
 ```markdown
 ![Alt text describing the diagram](./<diagram-name>.png)
