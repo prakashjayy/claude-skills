@@ -115,6 +115,39 @@ One sentence. Subject + verb + object + why it matters.
 
 ---
 
+## Terminology Warnings
+
+When a paper uses a term in a way that diverges from its standard meaning in the broader community, insert an inline blockquote warning at the exact point where the term first appears in the blog.
+
+### Format
+
+```markdown
+> **⚠️ Terminology warning:** The paper uses **[term]** to mean [what the paper means].
+> In most [ML / statistics / CS] literature, **[term]** means [standard definition] — [brief example that makes the distinction concrete].
+> The paper's usage is common in [specific subfield or community] but will mislead readers coming from [other context].
+```
+
+### Rules
+
+- Place the warning *immediately after* the sentence that introduces the term — not in a footnote, not at the end of the section.
+- Keep it to 2–3 sentences. The goal is to inoculate the reader, not to write a survey of the literature.
+- Always name the community where the standard definition lives (e.g. "supervised learning", "classical statistics", "information theory") so the reader knows which frame of reference you're anchoring to.
+- If the paper's usage is arguably acceptable but risky, say so: *"This usage is defensible but uncommon outside [subfield]."*
+- If a term is used loosely throughout the whole paper (not just once), add the warning at first use and note *"the paper uses this term throughout in the same loose sense."*
+- Do not warn about terms the paper explicitly defines itself and uses consistently with its own definition — only warn when the paper's usage silently conflicts with a common external definition.
+
+### Examples of mismatches worth flagging
+
+| Term as used in paper | Standard meaning | Paper's meaning | Worth warning? |
+|---|---|---|---|
+| "concept drift" | P(Y\|X) changes | P(X) changes | Yes |
+| "inference" (deep learning) | running a trained model forward | probabilistic inference (computing posteriors) | Yes, if context is ambiguous |
+| "energy" (energy-based models) | scalar score function | physical energy | Yes |
+| "regularization" | penalty on model complexity | any form of constraint | Only if the paper uses it unusually |
+| "attention" | learned weighted average | general notion of focus | Only if conflated with human attention |
+
+---
+
 ## Writing rules
 
 | Rule | Why |
@@ -129,6 +162,7 @@ One sentence. Subject + verb + object + why it matters.
 | Math Primer before every equation that appears in How It Works | Reader never hits unexplained symbols |
 | Every diagram has a one-sentence alt text | Accessibility + context |
 | Diagrams saved as PNGs in the paper folder, embedded with relative paths | Self-contained output |
+| Terminology warning blockquote at first use of any term the paper uses non-standardly | Prevents reader confusion before it happens |
 
 ## Tone
 Warm, curious, enthusiastic — like a smart friend who just read the paper and can't wait to tell you about it. Not academic. Not dumbed-down. Respectful of the reader's intelligence but not their domain knowledge.
