@@ -25,9 +25,8 @@ Follow [WORKFLOW.md](WORKFLOW.md) for full details. Summary:
 3. **Download** — `mkdir -p <folder>` and `curl` the PDF
 4. **Extract** — `uv run python scripts/extract_pages.py <folder>/<paper-id>.pdf`
 5. **Identify** — build three lists: math concepts, visual opportunities, terminology mismatches
-6. **Diagrams** — generate one PNG per visual opportunity using matplotlib; save to `<folder>/`
-7. **Write** — produce `<folder>/blog.md` per [BLOG-FRAMEWORK.md](BLOG-FRAMEWORK.md); add terminology warning blockquotes; add worked examples if `--use-simple-examples`
-8. **Confirm** — report paths of PDF, blog.md, and each PNG; print title and one-line hook
+6. **Write** — produce `<folder>/blog.md` per [BLOG-FRAMEWORK.md](BLOG-FRAMEWORK.md); embed ASCII/Unicode diagrams inline; add terminology warning blockquotes; add worked examples if `--use-simple-examples`
+7. **Confirm** — report paths of PDF and blog.md; print title and one-line hook
 
 ## Advanced features
 

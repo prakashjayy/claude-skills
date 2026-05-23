@@ -11,3 +11,4 @@ A collection of Claude Code skills for common workflows. Clone this repo and poi
 | `setup-uv` | "setup uv" / "init repo with uv" / "uv project" | Sets up a Python repo using the `uv` package manager with `pyproject.toml`. Supports `--torch` for PyTorch with CPU/CUDA/macOS variants. |
 | `write-a-skill` | "write a skill" / "create a skill" / "build a skill" | Scaffolds a new Claude Code skill with proper structure, description, and bundled reference files. |
 | `github-ready` | "github-ready" / "remove claude from commits" / "clean commit history" | Installs a `commit-msg` hook and adds a CLAUDE.md rule so Claude's name never appears in git history. |
+| `paper-2-math-background` | arxiv URL / paper ID / "what math do I need" / "math primer" | Analyzes a research paper and produces a detailed math primer — prerequisite concepts from first principles, precise subscript notation, ASCII diagrams per concept, and a curated resource section via live web search. |

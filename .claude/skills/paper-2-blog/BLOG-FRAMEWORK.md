@@ -86,11 +86,13 @@ Introduce every mathematical concept the reader will encounter — before they e
 - Analogy sources that work well: cooking, LEGO, post-it notes, libraries, classrooms, sports teams, maps.
 - Keep each step to 2–3 sentences max.
 - Reference Math Primer concepts by name when they appear ("this is where softmax comes in").
-- **Embed diagrams** for any step where a visual would replace a paragraph of description. Use relative markdown image links immediately after the step they illustrate:
-  ```markdown
-  ![The encoder reads the input sentence and compresses it into a meaning vector.](./encoder_decoder_architecture.png)
+- **Embed diagrams** for any step where a visual would replace a paragraph of description. Draw them as ASCII/Unicode art in a fenced code block, placed immediately after the step they illustrate:
+  ````markdown
   ```
-- Every diagram needs a descriptive alt text (one sentence explaining what the diagram shows).
+    Input ──→ [Encoder] ──→ z ──→ [Decoder] ──→ Output
+  ```
+  ````
+  Follow the diagram with a one-sentence caption in italics explaining what it shows.
 
 **Analogy quality test:** Could a 12-year-old picture it? If not, find a simpler one.
 
@@ -160,8 +162,8 @@ When a paper uses a term in a way that diverges from its standard meaning in the
 | No "groundbreaking", "revolutionary", "state-of-the-art" | Clichés that say nothing |
 | Short sentences when explaining mechanisms | Reduces cognitive load |
 | Math Primer before every equation that appears in How It Works | Reader never hits unexplained symbols |
-| Every diagram has a one-sentence alt text | Accessibility + context |
-| Diagrams saved as PNGs in the paper folder, embedded with relative paths | Self-contained output |
+| Every diagram has a one-sentence italic caption below it | Context without alt text |
+| Diagrams are ASCII/Unicode art in fenced code blocks — no image files | Self-contained markdown, no external dependencies |
 | Terminology warning blockquote at first use of any term the paper uses non-standardly | Prevents reader confusion before it happens |
 
 ## Tone

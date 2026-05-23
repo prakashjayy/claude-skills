@@ -62,23 +62,7 @@ Common mismatch patterns to look for:
 - Term borrowed from another field with a shifted meaning (e.g. "energy" in physics vs. energy-based models)
 - Term with conflicting definitions across subfields (e.g. "regularisation", "attention", "inference")
 
-## Step 6 — Create diagram PNGs
-
-Ensure matplotlib is available:
-```bash
-uv run python -c "import matplotlib" 2>/dev/null || uv add matplotlib
-```
-
-For each visual opportunity, write and run a self-contained Python script using matplotlib. Save to `<folder>/<snake_case_name>.png`.
-
-Diagram guidelines:
-- Clear label on every box, arrow, and axis — no unexplained symbols
-- 2–3 colours max
-- Left-to-right flow for pipelines; top-to-bottom for hierarchies
-- `bbox_inches='tight'`, `dpi=150`
-- Verify each PNG exists before proceeding
-
-## Step 7 — Write the blog post
+## Step 6 — Write the blog post
 
 Follow [BLOG-FRAMEWORK.md](BLOG-FRAMEWORK.md) for structure and writing rules.
 
@@ -91,17 +75,19 @@ Follow [BLOG-FRAMEWORK.md](BLOG-FRAMEWORK.md) for structure and writing rules.
 
 **Worked examples** (only if `--use-simple-examples` was passed): after applying BLOG-FRAMEWORK.md, add a concrete worked example for every technical concept, immediately after it is introduced, following [SIMPLE-EXAMPLES.md](SIMPLE-EXAMPLES.md).
 
-**Diagrams:** embed with relative paths immediately after the step they illustrate:
-```markdown
-![One-sentence description of what the diagram shows](./diagram_name.png)
+**Diagrams:** draw ASCII/Unicode diagrams directly in the markdown immediately after the step they illustrate, inside a fenced code block:
+
 ```
+  x ──→ [Encoder] ──→ z ──→ [Decoder] ──→ x̂
+```
+
+Use box-drawing characters (`─ │ ┌ ┐ └ ┘ ├ ┤`), arrows (`→ ← ↑ ↓ ⇒`), and math symbols (`∑ ∂ ∇ ∈`). No external image files.
 
 Save output to `<folder>/blog.md`.
 
-## Step 8 — Confirm
+## Step 7 — Confirm
 
 Report:
 - PDF path
 - Blog path
-- Each PNG created (name + one-line description)
 - Blog title and one-line hook
