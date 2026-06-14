@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Dataset download helper for paper-to-code.
+Dataset download helper for paper-2-code.
 
 Supports: torchvision, huggingface datasets, direct URL (tgz/zip), kaggle.
 
@@ -211,7 +211,7 @@ def verify_download(target: str) -> int:
 # ---------------------------------------------------------------------------
 
 def main():
-    parser = argparse.ArgumentParser(description="Download a dataset for paper-to-code.")
+    parser = argparse.ArgumentParser(description="Download a dataset for paper-2-code.")
     parser.add_argument("--source", choices=["torchvision", "hf_hub", "direct", "kaggle"],
                         help="Download source")
     parser.add_argument("--name",   help="torchvision class name (e.g. CIFAR10)")

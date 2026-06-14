@@ -34,7 +34,7 @@ If paper is `@path/to/file.pdf`, use that path directly.
 ## Step 3 — Extract paper sections
 
 ```bash
-uv run python ~/.claude/skills/paper-to-code/scripts/extract_paper.py <pdf-path>
+uv run python ~/.claude/skills/paper-2-code/scripts/extract_paper.py <pdf-path>
 ```
 
 This prints: abstract, introduction, method/approach section, training/implementation details, experiments/results, and any algorithm pseudocode blocks. The output gives you the raw material for all subsequent subskills.
